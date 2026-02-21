@@ -12,6 +12,7 @@ LOCATIONS = [
     {"name": "Brevard, NC",     "lat": 35.2337, "lon": -82.7343},
     {"name": "Asheville, NC",   "lat": 35.5951, "lon": -82.5515},
     {"name": "Bryson City, NC", "lat": 35.4279, "lon": -83.4488},
+    {"name": "Waynesville, NC", "lat": 35.4890, "lon": -82.9874},
 ]
 
 WMO_CODES = {
