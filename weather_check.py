@@ -36,7 +36,7 @@ def fetch_weather(lat, lon):
     url = (
         "https://api.open-meteo.com/v1/forecast"
         f"?latitude={lat}&longitude={lon}"
-        "&current=temperature_2m,weather_code,wind_speed_10m,wind_direction_10m"
+        "&current=temperature_2m,weather_code,wind_speed_10m,wind_direction_10m,relative_humidity_2m,uv_index"
         "&daily=temperature_2m_min,temperature_2m_max"
         "&hourly=precipitation"
         "&temperature_unit=fahrenheit"
@@ -84,6 +84,8 @@ def print_location(name, data):
     conditions = WMO_CODES.get(data["current"]["weather_code"], f"Code {data['current']['weather_code']}")
     wind_speed = data["current"]["wind_speed_10m"]
     wind_dir   = degrees_to_cardinal(data["current"]["wind_direction_10m"])
+    humidity   = data["current"]["relative_humidity_2m"]
+    uv         = data["current"]["uv_index"]
     today_high = daily["temperature_2m_max"][ti]
 
     # Tonight's low = tomorrow's daily min; fall back to today's if unavailable
@@ -100,6 +102,8 @@ def print_location(name, data):
     print(f"  Current Temp:   {temp:.0f}°F")
     print(f"  Conditions:     {conditions}")
     print(f"  Wind:           {wind_speed:.0f} mph {wind_dir}")
+    print(f"  Humidity:       {humidity:.0f}%")
+    print(f"  UV Index:       {uv:.1f}")
     print(f"  Overnight Low:  {overnight_low:.0f}°F")
     print(f"  Rain (24h):     {rain_24h:.2f}\"")
     if freeze_thaw:
